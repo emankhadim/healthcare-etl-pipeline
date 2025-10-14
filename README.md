@@ -55,7 +55,7 @@ healthcare-etl-pipeline/
 | Table | Description |
 |-------|-------------|
 | **patients** | Patient demographic information |
-| **encounters** | Hospital visits and appointments |
+| **encounters** | Hospital visits |
 | **diagnoses** | Medical diagnoses linked to encounters |
 
 ![Database Schema](data_model.png)
