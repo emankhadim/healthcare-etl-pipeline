@@ -1,0 +1,8 @@
+{
+  "summary": {
+    "patients": 11,
+    "encounters": 6,
+    "diagnoses": 4
+  },
+  "duration_sec": 0.22
+}

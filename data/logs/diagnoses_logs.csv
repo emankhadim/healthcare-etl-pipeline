@@ -1,0 +1,5 @@
+encounter_id,code_system,diagnosis_code,is_primary,recorded_at_raw,recorded_at,qa_flags,source_file
+ENC-000100,ICD-10,N39.0,False,2035-01-01T00:00:00Z,2035-01-01 00:00:00+00:00,FUTURE_DATE,diagnoses.xml
+ENC-000105,ICD-10,ZZZ,True,2025-01-05T11:10:00,2025-01-05 11:10:00+00:00,INVALID_CODE,diagnoses.xml
+,ICD-10,E66.9,,2025-01-02T09:00:00Z,2025-01-02 09:00:00+00:00,INVALID_ENCOUNTER_ID|MISSING_ISPRIMARY,diagnoses.xml
+ENC-000103,ICD-10,M54.5,False,,2024-11-01T10:00:00Z,FK_VIOLATION,diagnoses.xml

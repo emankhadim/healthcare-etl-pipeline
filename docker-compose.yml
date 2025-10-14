@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:15
+    container_name: healthcare_etl_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: etl_user
+      POSTGRES_PASSWORD: etl_pass
+      POSTGRES_DB: healthcare_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U etl_user -d healthcare_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    image: adminer
+    container_name: healthcare_adminer
+    restart: always
+    ports:
+      - "8090:8080"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

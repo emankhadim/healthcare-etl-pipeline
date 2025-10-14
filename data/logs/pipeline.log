@@ -1,0 +1,226 @@
+2025-10-14 17:15:44 - INFO  - Starting Healthcare ETL Pipeline
+2025-10-14 17:17:18 - INFO  - Starting Healthcare ETL Pipeline
+2025-10-14 17:18:53 - INFO  - Starting Healthcare ETL Pipeline
+2025-10-14 17:18:53 - INFO  - Creating tables: diagnoses, encounters, patients
+2025-10-14 17:18:53 - INFO  - Tables created.
+2025-10-14 17:18:53 - INFO  - Running transforms...
+2025-10-14 17:18:53 - INFO  - Loading patients (extract)…
+2025-10-14 17:18:53 - INFO  - Extracted patients: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/raw/patients.csv (12 rows)
+2025-10-14 17:18:53 - INFO  - Logged duplicates: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/logs/patients_logs.csv (1 rows)
+2025-10-14 17:18:53 - WARNING - Removed 1 duplicate patient_id rows
+2025-10-14 17:18:53 - INFO  - Saved cleaned patients:  /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/cleaned/patients_clean.csv (11 rows)
+2025-10-14 17:18:53 - INFO  - Loading encounters (extract)…
+2025-10-14 17:18:53 - INFO  - Starting encounters transform
+2025-10-14 17:18:53 - WARNING - Dropping 1 rows with invalid dates (discharge before admit)
+2025-10-14 17:18:53 - INFO  - De-dup removed 1 rows (kept best per encounter_id)
+2025-10-14 17:18:53 - INFO  - Validating referential integrity (patient_id foreign key)...
+2025-10-14 17:18:53 - WARNING - Found 1 foreign key violations (patient_id)
+2025-10-14 17:18:53 - WARNING - Invalid patient_id references: ['P-0999']
+2025-10-14 17:18:53 - INFO  - Removed FK violations → 6 valid records remaining
+2025-10-14 17:18:53 - WARNING - Wrote drop log: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/logs/encounters_logs.csv (3 rows)
+2025-10-14 17:18:53 - INFO  - Encounters transform complete → 6 rows
+2025-10-14 17:18:53 - INFO  - Saved cleaned encounters: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/cleaned/encounters_clean.csv
+2025-10-14 17:18:53 - INFO  - Loading diagnoses XML: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/raw/diagnoses.xml
+2025-10-14 17:18:53 - INFO  - Extracted 8 diagnosis rows
+2025-10-14 17:18:53 - WARNING - Diagnoses: dropped 3 rows → /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/logs/diagnoses_logs.csv
+2025-10-14 17:18:53 - INFO  - Validating referential integrity (encounter_id foreign key)...
+2025-10-14 17:18:53 - WARNING - Found 1 foreign key violations (encounter_id)
+2025-10-14 17:18:53 - WARNING - Invalid encounter_id references: ['ENC-000103']
+2025-10-14 17:18:53 - INFO  - Removed FK violations: 4 valid records remaining
+2025-10-14 17:18:53 - INFO  - Saved cleaned diagnoses: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/cleaned/diagnoses_clean.csv (4 rows)
+2025-10-14 17:18:53 - INFO  - Loading data to database...
+2025-10-14 17:18:53 - INFO  - Starting DB load
+2025-10-14 17:18:53 - INFO  - Patients: reading 11 rows
+2025-10-14 17:18:53 - INFO  - Patients: inserted 11
+2025-10-14 17:18:53 - INFO  - Encounters: reading 6 rows
+2025-10-14 17:18:53 - INFO  - Encounters: inserted 6
+2025-10-14 17:18:53 - INFO  - Diagnoses: reading 4 rows
+2025-10-14 17:18:53 - INFO  - Diagnoses: inserted 4
+2025-10-14 17:18:53 - INFO  - Load committed successfully
+2025-10-14 17:18:53 - INFO  - Load summary: patients=11, encounters=6, diagnoses=4
+2025-10-14 17:18:53 - INFO  - Pipeline complete: {'patients': 11, 'encounters': 6, 'diagnoses': 4}
+2025-10-14 17:18:53 - INFO  - ✅ Pipeline complete: {'patients': 11, 'encounters': 6, 'diagnoses': 4}
+2025-10-14 18:18:23 - INFO  - Starting Healthcare ETL Pipeline
+2025-10-14 18:18:24 - INFO  - All tables exist. Skipping creation.
+2025-10-14 18:18:24 - INFO  - Running transforms...
+2025-10-14 18:18:24 - INFO  - Loading patients (extract)…
+2025-10-14 18:18:24 - INFO  - Extracted patients: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/raw/patients.csv (12 rows)
+2025-10-14 18:18:24 - INFO  - Logged duplicates: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/logs/patients_logs.csv (1 rows)
+2025-10-14 18:18:24 - WARNING - Removed 1 duplicate patient_id rows
+2025-10-14 18:18:24 - INFO  - Saved cleaned patients:  /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/cleaned/patients_clean.csv (11 rows)
+2025-10-14 18:18:24 - INFO  - Loading encounters (extract)…
+2025-10-14 18:18:24 - INFO  - Starting encounters transform
+2025-10-14 18:18:24 - WARNING - Dropping 1 rows with invalid dates (discharge before admit)
+2025-10-14 18:18:24 - INFO  - De-dup removed 1 rows (kept best per encounter_id)
+2025-10-14 18:18:24 - INFO  - Validating referential integrity (patient_id foreign key)...
+2025-10-14 18:18:24 - WARNING - Found 1 foreign key violations (patient_id)
+2025-10-14 18:18:24 - WARNING - Invalid patient_id references: ['P-0999']
+2025-10-14 18:18:24 - INFO  - Removed FK violations → 6 valid records remaining
+2025-10-14 18:18:24 - WARNING - Wrote drop log: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/logs/encounters_logs.csv (3 rows)
+2025-10-14 18:18:24 - INFO  - Encounters transform complete → 6 rows
+2025-10-14 18:18:24 - INFO  - Saved cleaned encounters: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/cleaned/encounters_clean.csv
+2025-10-14 18:18:24 - INFO  - Loading diagnoses XML: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/raw/diagnoses.xml
+2025-10-14 18:18:24 - INFO  - Extracted 8 diagnosis rows
+2025-10-14 18:18:24 - WARNING - Diagnoses: dropped 3 rows → /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/logs/diagnoses_logs.csv
+2025-10-14 18:18:24 - INFO  - Validating referential integrity (encounter_id foreign key)...
+2025-10-14 18:18:24 - WARNING - Found 1 foreign key violations (encounter_id)
+2025-10-14 18:18:24 - WARNING - Invalid encounter_id references: ['ENC-000103']
+2025-10-14 18:18:24 - INFO  - Removed FK violations: 4 valid records remaining
+2025-10-14 18:18:24 - INFO  - Saved cleaned diagnoses: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/cleaned/diagnoses_clean.csv (4 rows)
+2025-10-14 18:18:24 - INFO  - Loading data to database...
+2025-10-14 18:18:24 - INFO  - Starting DB load
+2025-10-14 18:18:24 - INFO  - Patients: reading 11 rows
+2025-10-14 18:18:24 - ERROR - Load failed; rolled back: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "patients_pkey"
+DETAIL:  Key (patient_id)=(P-0001) already exists.
+
+[SQL: INSERT INTO patients (patient_id, given_name, family_name, sex, dob, height, weight, qa_flags, source_file) VALUES (%(patient_id__0)s, %(given_name__0)s, %(family_name__0)s, %(sex__0)s, %(dob__0)s, %(height__0)s, %(weight__0)s, %(qa_flags__0)s, %(sou ... 216 characters truncated ... ame__2)s, %(sex__2)s, %(dob__2)s, %(height__2)s, %(weight__2)s, %(qa_flags__2)s, %(source_file__2)s)]
+[parameters: {'given_name__0': 'Alice', 'family_name__0': 'Müller', 'source_file__0': 'patients.csv', 'dob__0': datetime.date(1987, 3, 14), 'patient_id__0': 'P-0001', 'weight__0': 65.0, 'height__0': 170.0, 'qa_flags__0': 'OK', 'sex__0': 'F', 'given_name__1': 'Bob', 'family_name__1': 'Smith', 'source_file__1': 'patients.csv', 'dob__1': datetime.date(1990, 12, 31), 'patient_id__1': 'P-0002', 'weight__1': 68.0, 'height__1': 172.7, 'qa_flags__1': 'OK', 'sex__1': 'M', 'given_name__2': 'Chloé', 'family_name__2': 'Dubois', 'source_file__2': 'patients.csv', 'dob__2': datetime.date(1985, 12, 31), 'patient_id__2': 'P-0003', 'weight__2': 54.5, 'height__2': 162.0, 'qa_flags__2': 'OK', 'sex__2': 'F'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2108, in _exec_insertmany_context
+    dialect.do_execute(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "patients_pkey"
+DETAIL:  Key (patient_id)=(P-0001) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/deepaireman/Desktop/healthcare-etl-pipeline/src/healthcare_etl/load/load_to_db.py", line 113, in load_all
+    p_count = load_patients(session)
+  File "/Users/deepaireman/Desktop/healthcare-etl-pipeline/src/healthcare_etl/load/load_to_db.py", line 53, in load_patients
+    session.bulk_save_objects(objs)
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4396, in bulk_save_objects
+    self._bulk_save_mappings(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4566, in _bulk_save_mappings
+    with util.safe_reraise():
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 147, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4555, in _bulk_save_mappings
+    bulk_persistence._bulk_insert(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/orm/bulk_persistence.py", line 199, in _bulk_insert
+    result = persistence._emit_insert_statements(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 1043, in _emit_insert_statements
+    result = connection.execute(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1412, in execute
+    return meth(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 483, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1839, in _execute_context
+    return self._exec_insertmany_context(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2116, in _exec_insertmany_context
+    self._handle_dbapi_exception(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2108, in _exec_insertmany_context
+    dialect.do_execute(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "patients_pkey"
+DETAIL:  Key (patient_id)=(P-0001) already exists.
+
+[SQL: INSERT INTO patients (patient_id, given_name, family_name, sex, dob, height, weight, qa_flags, source_file) VALUES (%(patient_id__0)s, %(given_name__0)s, %(family_name__0)s, %(sex__0)s, %(dob__0)s, %(height__0)s, %(weight__0)s, %(qa_flags__0)s, %(sou ... 216 characters truncated ... ame__2)s, %(sex__2)s, %(dob__2)s, %(height__2)s, %(weight__2)s, %(qa_flags__2)s, %(source_file__2)s)]
+[parameters: {'given_name__0': 'Alice', 'family_name__0': 'Müller', 'source_file__0': 'patients.csv', 'dob__0': datetime.date(1987, 3, 14), 'patient_id__0': 'P-0001', 'weight__0': 65.0, 'height__0': 170.0, 'qa_flags__0': 'OK', 'sex__0': 'F', 'given_name__1': 'Bob', 'family_name__1': 'Smith', 'source_file__1': 'patients.csv', 'dob__1': datetime.date(1990, 12, 31), 'patient_id__1': 'P-0002', 'weight__1': 68.0, 'height__1': 172.7, 'qa_flags__1': 'OK', 'sex__1': 'M', 'given_name__2': 'Chloé', 'family_name__2': 'Dubois', 'source_file__2': 'patients.csv', 'dob__2': datetime.date(1985, 12, 31), 'patient_id__2': 'P-0003', 'weight__2': 54.5, 'height__2': 162.0, 'qa_flags__2': 'OK', 'sex__2': 'F'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-14 18:18:24 - ERROR - ETL pipeline failed: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "patients_pkey"
+DETAIL:  Key (patient_id)=(P-0001) already exists.
+
+[SQL: INSERT INTO patients (patient_id, given_name, family_name, sex, dob, height, weight, qa_flags, source_file) VALUES (%(patient_id__0)s, %(given_name__0)s, %(family_name__0)s, %(sex__0)s, %(dob__0)s, %(height__0)s, %(weight__0)s, %(qa_flags__0)s, %(sou ... 216 characters truncated ... ame__2)s, %(sex__2)s, %(dob__2)s, %(height__2)s, %(weight__2)s, %(qa_flags__2)s, %(source_file__2)s)]
+[parameters: {'given_name__0': 'Alice', 'family_name__0': 'Müller', 'source_file__0': 'patients.csv', 'dob__0': datetime.date(1987, 3, 14), 'patient_id__0': 'P-0001', 'weight__0': 65.0, 'height__0': 170.0, 'qa_flags__0': 'OK', 'sex__0': 'F', 'given_name__1': 'Bob', 'family_name__1': 'Smith', 'source_file__1': 'patients.csv', 'dob__1': datetime.date(1990, 12, 31), 'patient_id__1': 'P-0002', 'weight__1': 68.0, 'height__1': 172.7, 'qa_flags__1': 'OK', 'sex__1': 'M', 'given_name__2': 'Chloé', 'family_name__2': 'Dubois', 'source_file__2': 'patients.csv', 'dob__2': datetime.date(1985, 12, 31), 'patient_id__2': 'P-0003', 'weight__2': 54.5, 'height__2': 162.0, 'qa_flags__2': 'OK', 'sex__2': 'F'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2108, in _exec_insertmany_context
+    dialect.do_execute(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "patients_pkey"
+DETAIL:  Key (patient_id)=(P-0001) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/deepaireman/Desktop/healthcare-etl-pipeline/src/healthcare_etl/services/etl.py", line 21, in run_etl
+    stats = load_all()
+  File "/Users/deepaireman/Desktop/healthcare-etl-pipeline/src/healthcare_etl/load/load_to_db.py", line 113, in load_all
+    p_count = load_patients(session)
+  File "/Users/deepaireman/Desktop/healthcare-etl-pipeline/src/healthcare_etl/load/load_to_db.py", line 53, in load_patients
+    session.bulk_save_objects(objs)
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4396, in bulk_save_objects
+    self._bulk_save_mappings(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4566, in _bulk_save_mappings
+    with util.safe_reraise():
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 147, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 4555, in _bulk_save_mappings
+    bulk_persistence._bulk_insert(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/orm/bulk_persistence.py", line 199, in _bulk_insert
+    result = persistence._emit_insert_statements(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/orm/persistence.py", line 1043, in _emit_insert_statements
+    result = connection.execute(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1412, in execute
+    return meth(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 483, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1839, in _execute_context
+    return self._exec_insertmany_context(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2116, in _exec_insertmany_context
+    self._handle_dbapi_exception(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2339, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2108, in _exec_insertmany_context
+    dialect.do_execute(
+  File "/Users/deepaireman/.pyenv/versions/3.10.12/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 921, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "patients_pkey"
+DETAIL:  Key (patient_id)=(P-0001) already exists.
+
+[SQL: INSERT INTO patients (patient_id, given_name, family_name, sex, dob, height, weight, qa_flags, source_file) VALUES (%(patient_id__0)s, %(given_name__0)s, %(family_name__0)s, %(sex__0)s, %(dob__0)s, %(height__0)s, %(weight__0)s, %(qa_flags__0)s, %(sou ... 216 characters truncated ... ame__2)s, %(sex__2)s, %(dob__2)s, %(height__2)s, %(weight__2)s, %(qa_flags__2)s, %(source_file__2)s)]
+[parameters: {'given_name__0': 'Alice', 'family_name__0': 'Müller', 'source_file__0': 'patients.csv', 'dob__0': datetime.date(1987, 3, 14), 'patient_id__0': 'P-0001', 'weight__0': 65.0, 'height__0': 170.0, 'qa_flags__0': 'OK', 'sex__0': 'F', 'given_name__1': 'Bob', 'family_name__1': 'Smith', 'source_file__1': 'patients.csv', 'dob__1': datetime.date(1990, 12, 31), 'patient_id__1': 'P-0002', 'weight__1': 68.0, 'height__1': 172.7, 'qa_flags__1': 'OK', 'sex__1': 'M', 'given_name__2': 'Chloé', 'family_name__2': 'Dubois', 'source_file__2': 'patients.csv', 'dob__2': datetime.date(1985, 12, 31), 'patient_id__2': 'P-0003', 'weight__2': 54.5, 'height__2': 162.0, 'qa_flags__2': 'OK', 'sex__2': 'F'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-14 18:20:48 - INFO  - Starting Healthcare ETL Pipeline
+2025-10-14 18:20:48 - INFO  - Creating tables: diagnoses, encounters, patients
+2025-10-14 18:20:48 - INFO  - Tables created.
+2025-10-14 18:20:48 - INFO  - Running transforms...
+2025-10-14 18:20:48 - INFO  - Loading patients (extract)…
+2025-10-14 18:20:48 - INFO  - Extracted patients: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/raw/patients.csv (12 rows)
+2025-10-14 18:20:48 - INFO  - Logged duplicates: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/logs/patients_logs.csv (1 rows)
+2025-10-14 18:20:48 - WARNING - Removed 1 duplicate patient_id rows
+2025-10-14 18:20:48 - INFO  - Saved cleaned patients:  /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/cleaned/patients_clean.csv (11 rows)
+2025-10-14 18:20:48 - INFO  - Loading encounters (extract)…
+2025-10-14 18:20:48 - INFO  - Starting encounters transform
+2025-10-14 18:20:48 - WARNING - Dropping 1 rows with invalid dates (discharge before admit)
+2025-10-14 18:20:48 - INFO  - De-dup removed 1 rows (kept best per encounter_id)
+2025-10-14 18:20:48 - INFO  - Validating referential integrity (patient_id foreign key)...
+2025-10-14 18:20:48 - WARNING - Found 1 foreign key violations (patient_id)
+2025-10-14 18:20:48 - WARNING - Invalid patient_id references: ['P-0999']
+2025-10-14 18:20:48 - INFO  - Removed FK violations → 6 valid records remaining
+2025-10-14 18:20:48 - WARNING - Wrote drop log: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/logs/encounters_logs.csv (3 rows)
+2025-10-14 18:20:48 - INFO  - Encounters transform complete → 6 rows
+2025-10-14 18:20:48 - INFO  - Saved cleaned encounters: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/cleaned/encounters_clean.csv
+2025-10-14 18:20:48 - INFO  - Loading diagnoses XML: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/raw/diagnoses.xml
+2025-10-14 18:20:48 - INFO  - Extracted 8 diagnosis rows
+2025-10-14 18:20:48 - WARNING - Diagnoses: dropped 3 rows → /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/logs/diagnoses_logs.csv
+2025-10-14 18:20:48 - INFO  - Validating referential integrity (encounter_id foreign key)...
+2025-10-14 18:20:48 - WARNING - Found 1 foreign key violations (encounter_id)
+2025-10-14 18:20:48 - WARNING - Invalid encounter_id references: ['ENC-000103']
+2025-10-14 18:20:48 - INFO  - Removed FK violations: 4 valid records remaining
+2025-10-14 18:20:48 - INFO  - Saved cleaned diagnoses: /Users/deepaireman/Desktop/healthcare-etl-pipeline/data/cleaned/diagnoses_clean.csv (4 rows)
+2025-10-14 18:20:48 - INFO  - Loading data to database...
+2025-10-14 18:20:48 - INFO  - Starting DB load
+2025-10-14 18:20:48 - INFO  - Patients: reading 11 rows
+2025-10-14 18:20:48 - INFO  - Patients: inserted 11
+2025-10-14 18:20:48 - INFO  - Encounters: reading 6 rows
+2025-10-14 18:20:48 - INFO  - Encounters: inserted 6
+2025-10-14 18:20:48 - INFO  - Diagnoses: reading 4 rows
+2025-10-14 18:20:48 - INFO  - Diagnoses: inserted 4
+2025-10-14 18:20:48 - INFO  - Load committed successfully
+2025-10-14 18:20:48 - INFO  - Load summary: patients=11, encounters=6, diagnoses=4
+2025-10-14 18:20:48 - INFO  - Pipeline complete: {'patients': 11, 'encounters': 6, 'diagnoses': 4}
+2025-10-14 18:20:48 - INFO  - ✅ Pipeline complete: {'patients': 11, 'encounters': 6, 'diagnoses': 4}
