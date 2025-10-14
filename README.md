@@ -58,7 +58,7 @@ healthcare-etl-pipeline/
 | **encounters** | Hospital visits and appointments |
 | **diagnoses** | Medical diagnoses linked to encounters |
 
-![Database Schema](data-model.png)
+![Database Schema](data_model.png)
 
 The database consists of three main tables with referential integrity:
 
