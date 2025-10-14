@@ -77,7 +77,7 @@ The database consists of three main tables with referential integrity:
 
 ### Prerequisites
 
-- Python 3.10+
+- Python 3.10 or higher
 - Docker and Docker Compose
 - Git
 
