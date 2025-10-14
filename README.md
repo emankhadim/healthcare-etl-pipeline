@@ -84,7 +84,7 @@ The database consists of three main tables with referential integrity:
 ### Installation
 ```bash
 # 1. Clone repository
-git clone <your-repo-url>
+git clone https://github.com/emankhadim/healthcare-etl-pipeline.git
 cd healthcare-etl-pipeline
 
 # 2. Create virtual environment
