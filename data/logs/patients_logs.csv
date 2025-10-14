@@ -1,2 +1,0 @@
-patient_id,given_name,family_name,sex,dob,height,weight,source_file,qa_flags
-P-0002, Bob       , Smith      , M  , 1990-12-31, 173 cm , 72 kg,patients.csv,DUPLICATE_PATIENT_ID

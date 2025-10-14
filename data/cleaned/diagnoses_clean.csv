@@ -1,5 +1,0 @@
-encounter_id,code_system,diagnosis_code,is_primary,recorded_at,qa_flags,source_file
-ENC-000100,ICD-10,E11.9,True,2024-12-31T12:05:00Z,OK,diagnoses.xml
-ENC-000101,ICD-10,G44,False,2024-12-31T00:00:00Z,OK,diagnoses.xml
-ENC-000102,ICD-10,I10,True,2024-12-31T10:00:00Z,OK,diagnoses.xml
-ENC-000104,ICD-10,J06.9,,2025-01-03T06:00:00Z,MISSING_ISPRIMARY,diagnoses.xml
