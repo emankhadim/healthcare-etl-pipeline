@@ -58,6 +58,19 @@ healthcare-etl-pipeline/
 | **encounters** | Hospital visits and appointments |
 | **diagnoses** | Medical diagnoses linked to encounters |
 
+![Database Schema](data-model.png)
+
+The database consists of three main tables with referential integrity:
+
+**Relationships:**
+- One patient can have multiple encounters (1:N)
+- One encounter can have multiple diagnoses (1:N)
+
+**Key Points:**
+- `patient_id` links encounters to patients
+- `encounter_id` links diagnoses to encounters
+- Foreign key constraints ensure data integrity
+- `qa_flags` track data quality issues in each table
 ---
 
 ## Getting Started
