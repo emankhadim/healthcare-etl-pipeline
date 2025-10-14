@@ -94,17 +94,13 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 # 3. Install package and dependencies
 pip install -e .
 
-# 4. Setup environment variables
-cp .env.example .env
-# Edit .env if needed (default values work with docker-compose)
-
-# 5. Start PostgreSQL database
+# 4. Start PostgreSQL database
 docker-compose up -d
 
-# 6. Run ETL pipeline
+# 5. Run ETL pipeline
 python -m healthcare_etl.scripts.run_etl
 
-# 7. Launch dashboard
+# 6. Launch dashboard
 streamlit run dashboard/app.py
 ```
 
