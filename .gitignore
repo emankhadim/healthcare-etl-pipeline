@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+
+# Data files (don't commit data)
+data/raw/*
+data/cleaned/*
+data/logs/*
+
+# Keep directory structure
+!data/raw/.gitkeep
+!data/cleaned/.gitkeep
+!data/logs/.gitkeep
+
+# Database
+*.db
+*.sqlite
+postgres_data/
+
+# Logs
+*.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Docker
+docker-compose.override.yml
