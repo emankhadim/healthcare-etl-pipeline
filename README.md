@@ -238,15 +238,15 @@ DB_PORT=5434
 
 **Why separate transform and load steps?**
 
-I decided to validate and clean data before touching the database. This way, if there's a problem with the data, I catch it early in the transform step rather than during a database insert. This prevents messy rollbacks and makes it much easier to debug issues - I can just look at the log files to see exactly what failed validation and why.
+I decided to validate and clean data before touching the database. This way, if there's a problem with the data, I catch it early in the transform step rather than during a database insert. This prevents messy rollbacks and makes it much easier to debug issues. I can just look at the log files to see exactly what failed validation and why.
 
 **Why log everything that gets rejected?**
 
-During development, I noticed that understanding *why* data was rejected was crucial. By keeping detailed logs of every rejected record with qa_flags, I can quickly identify patterns in data quality issues. For example, if I see multiple FK_VIOLATION errors, I know to check the source data ordering. These logs also help justify data cleaning decisions to stakeholders.
+During development, I noticed that understanding *why* data was rejected was crucial. By keeping detailed logs of every rejected record with qa_flags, I can quickly identify patterns in data quality issues. For example, if I see multiple FK_VIOLATION errors, I know to check the source data ordering. These logs also help justify data cleaning decisions.
 
 **Why check foreign keys during transform instead of letting the database handle it?**
 
-The database will catch FK violations anyway, but at that point you've already done a lot of work. By checking FKs during the transform step, I avoid wasting time on database operations that will fail. Plus, I get much cleaner error messages in my logs that actually tell me which specific patient_id or encounter_id is missing.
+The database will catch FK violations anyway, but at that point I have already done a lot of work. By checking FKs during the transform step, I avoid wasting time on database operations that will fail. Plus, I get much cleaner error messages in my logs that actually tell me which specific patient_id or encounter_id is missing.
 
 ---
 
