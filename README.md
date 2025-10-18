@@ -104,9 +104,6 @@ python -m healthcare_etl.scripts.run_etl
 streamlit run dashboard/app.py
 ```
 
-**Dashboard URL:** http://localhost:8501  
-**Adminer (Database UI):** http://localhost:8090
-
 ---
 
 ## Usage
