@@ -6,6 +6,8 @@ Load cleaned CSV data into PostgreSQL database.
 
 from __future__ import annotations
 import logging
+import os
+import sqlalchemy as sa
 import pandas as pd
 from sqlalchemy.orm import Session
 from healthcare_etl.core.logging_setup import setup_logging
@@ -102,6 +104,16 @@ def load_diagnoses(session: Session) -> int:
     session.bulk_save_objects(objs)
     log.info("Diagnoses: inserted %d", len(objs))
     return len(objs)
+def _clean_start(session: Session) -> None:
+   
+    if os.getenv("CLEAN_START", "false").lower() == "true":
+        log.info("CLEAN_START=true, Truncating tables for a fresh load.")
+        session.execute(sa.text("""
+            TRUNCATE TABLE diagnoses, encounters, patients
+            RESTART IDENTITY CASCADE;
+        """))
+        session.commit()
+        log.info("Database truncated.")
 
 def load_all() -> dict:
     setup_logging()
@@ -110,6 +122,7 @@ def load_all() -> dict:
 
     with Session(engine) as session:
         try:
+            _clean_start(session)
             p_count = load_patients(session)
             e_count = load_encounters(session)
             d_count = load_diagnoses(session)
@@ -124,4 +137,5 @@ def load_all() -> dict:
     return {"patients": p_count, "encounters": e_count, "diagnoses": d_count}
 
 if __name__ == "__main__":
+   
     load_all()

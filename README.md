@@ -97,10 +97,13 @@ pip install -e .
 # 4. Start PostgreSQL database
 docker-compose up -d
 
-# 5. Run ETL pipeline
+# 5 To start first time ETL:
+CLEAN_START=true python -m healthcare_etl.scripts.run_etl
+
+# 6 Run ETL (normal)
 python -m healthcare_etl.scripts.run_etl
 
-# 6. Launch dashboard
+# 7. Launch dashboard
 streamlit run dashboard/app.py
 ```
 
