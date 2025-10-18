@@ -5,6 +5,7 @@ Interactive visualization of data distribution and quality metrics
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 from sqlalchemy import create_engine
 from pathlib import Path
 import os
@@ -12,7 +13,56 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-st.set_page_config(page_title="ETL Dashboard", layout="wide")
+# Professional color palette
+COLORS = {
+    'primary': '#2563EB',      # Professional blue
+    'secondary': '#7C3AED',    # Purple accent
+    'success': '#059669',      # Forest green
+    'warning': '#D97706',      # Amber
+    'danger': '#DC2626',       # Red
+    'info': '#0891B2',         # Cyan
+    'neutral': '#6B7280',      # Gray
+    'dark': '#1F2937',         # Dark gray
+    'light': '#F3F4F6'         # Light gray
+}
+
+st.set_page_config(page_title="Healthcare ETL Dashboard", layout="wide")
+
+# Custom CSS for professional styling
+st.markdown("""
+<style>
+    /* Metric containers */
+    [data-testid="metric-container"] {
+        background-color: #1e293b;
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid #334155;
+    }
+    
+    /* Headers */
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+        color: #f1f5f9 !important;
+    }
+    
+    /* Tab styling */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 24px;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        height: 48px;
+        padding-left: 20px;
+        padding-right: 20px;
+        color: #94a3b8;
+        font-weight: 500;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        color: #2563EB !important;
+        border-bottom: 2px solid #2563EB;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 # Database connection
 @st.cache_resource
@@ -66,7 +116,7 @@ diagnoses_log = load_log("data/logs/diagnoses_logs.csv")
 
 # Summary metrics
 st.subheader("Data Summary")
-st.markdown("**Overview of successfully loaded records in the database**")
+st.markdown("Overview of successfully loaded records in the database")
 
 col1, col2, col3, col4 = st.columns(4)
 
@@ -95,7 +145,7 @@ st.markdown("---")
 
 # Data Distribution
 st.subheader("Data Distribution")
-st.markdown("**How the data is distributed across different categories**")
+st.markdown("How the data is distributed across different categories")
 
 # Patient Demographics
 st.markdown("### Patient Demographics")
@@ -109,7 +159,7 @@ with col1:
         gender_counts = patients['sex'].value_counts()
         
         # Map sex codes to labels
-        gender_labels = {'M': 'Male', 'F': 'Female', 'U': 'Unknown'}
+        gender_labels = {'M': 'Male', 'F': 'Female', 'U': 'Unknown', 'O': 'Other'}
         gender_data = pd.DataFrame({
             'Gender': [gender_labels.get(k, k) for k in gender_counts.index],
             'Count': gender_counts.values
@@ -120,16 +170,21 @@ with col1:
             values='Count',
             names='Gender',
             hole=0.4,
-            color_discrete_sequence=['#636EFA', '#EF553B', '#00CC96']
+            color_discrete_sequence=[COLORS['primary'], COLORS['danger'], COLORS['neutral'], COLORS['secondary']]
         )
         fig.update_traces(textposition='inside', textinfo='percent+label')
-        fig.update_layout(height=300)
+        fig.update_layout(
+            height=300,
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            font=dict(color='#94a3b8')
+        )
         st.plotly_chart(fig, use_container_width=True)
         
         male_count = gender_counts.get('M', 0)
         female_count = gender_counts.get('F', 0)
-        unknown_count = gender_counts.get('U', 0)
-        st.caption(f"Male: {male_count} | Female: {female_count} | Unknown: {unknown_count}")
+        unknown_count = gender_counts.get('U', 0) + gender_counts.get('O', 0)
+        st.caption(f"Male: {male_count} | Female: {female_count} | Unknown/Other: {unknown_count}")
     else:
         st.info("Gender data not available")
 
@@ -149,15 +204,24 @@ with col2:
             labels = ['0-17', '18-34', '35-49', '50-64', '65+']
             patients_temp['age_group'] = pd.cut(patients_temp['age'], bins=bins, labels=labels, right=False)
             age_counts = patients_temp['age_group'].value_counts().sort_index()
+            
             fig = px.bar(
                 x=age_counts.index.astype(str),
                 y=age_counts.values,
                 labels={'x': 'Age Group', 'y': 'Number of Patients'},
                 text=age_counts.values,
-                color_discrete_sequence=['#636EFA']
+                color_discrete_sequence=[COLORS['primary']]
             )
             fig.update_traces(textposition='outside')
-            fig.update_layout(showlegend=False, height=300)
+            fig.update_layout(
+                showlegend=False, 
+                height=300,
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+                font=dict(color='#94a3b8'),
+                xaxis=dict(showgrid=False),
+                yaxis=dict(showgrid=True, gridcolor='#334155')
+            )
             st.plotly_chart(fig, use_container_width=True)
             avg_age = patients_temp['age'].mean()
             st.caption(f"Average age: {avg_age:.1f} years | Total: {len(patients_temp)} patients")
@@ -181,10 +245,18 @@ with col1:
             y=type_counts.values,
             labels={'x': 'Visit Type', 'y': 'Number of Encounters'},
             text=type_counts.values,
-            color_discrete_sequence=['#00CC96']
+            color_discrete_sequence=[COLORS['info']]
         )
         fig.update_traces(textposition='outside')
-        fig.update_layout(showlegend=False, height=300)
+        fig.update_layout(
+            showlegend=False, 
+            height=300,
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            font=dict(color='#94a3b8'),
+            xaxis=dict(showgrid=False),
+            yaxis=dict(showgrid=True, gridcolor='#334155')
+        )
         st.plotly_chart(fig, use_container_width=True)
         
         st.caption(f"Total encounters: {type_counts.sum()}")
@@ -197,14 +269,30 @@ with col2:
         st.caption("Shows how many visits are closed vs still open")
         
         status_counts = encounters['encounter_status'].value_counts()
+        
+        # Use different colors for status
+        status_colors = []
+        for status in status_counts.index:
+            if status == 'CLOSED':
+                status_colors.append(COLORS['success'])
+            elif status == 'OPEN':
+                status_colors.append(COLORS['warning'])
+            else:
+                status_colors.append(COLORS['neutral'])
+        
         fig = px.pie(
             values=status_counts.values,
             names=status_counts.index,
             hole=0.4,
-            color_discrete_sequence=['#AB63FA', '#FFA15A']
+            color_discrete_sequence=status_colors
         )
         fig.update_traces(textposition='inside', textinfo='percent+label')
-        fig.update_layout(height=300)
+        fig.update_layout(
+            height=300,
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            font=dict(color='#94a3b8')
+        )
         st.plotly_chart(fig, use_container_width=True)
         
         closed_count = status_counts.get('CLOSED', 0)
@@ -218,7 +306,7 @@ st.markdown("---")
 
 # Data Quality
 st.subheader("Data Quality Report")
-st.markdown("**Detailed information about data quality issues and rejections**")
+st.markdown("Detailed information about data quality issues and rejections")
 
 tab1, tab2, tab3, tab4 = st.tabs(["Overview", "Patients", "Encounters", "Diagnoses"])
 
@@ -261,9 +349,16 @@ with tab1:
             y=list(issue_breakdown.values()),
             labels={'x': 'Data Type', 'y': 'Number of Issues'},
             text=list(issue_breakdown.values()),
-            color_discrete_sequence=['#EF553B']
+            color_discrete_sequence=[COLORS['danger']]
         )
         fig.update_traces(textposition='outside')
+        fig.update_layout(
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            font=dict(color='#94a3b8'),
+            xaxis=dict(showgrid=False),
+            yaxis=dict(showgrid=True, gridcolor='#334155')
+        )
         st.plotly_chart(fig, use_container_width=True)
     else:
         st.success("Great! No data quality issues found. All records are clean.")
@@ -300,7 +395,7 @@ with tab3:
         
         if 'qa_flags' in encounters_log.columns:
             fk_issues = encounters_log['qa_flags'].str.contains('FK_VIOLATION', na=False).sum()
-            date_issues = encounters_log['qa_flags'].str.contains('DISCHARGE_BEFORE_ADMIT', na=False).sum()
+            date_issues = encounters_log['qa_flags'].str.contains('DISCHARGE_BEFORE_ADMIT|DATE_LOGIC_ERROR', na=False).sum()
             dup_issues = encounters_log['qa_flags'].str.contains('DEDUP', na=False).sum()
             
             if fk_issues:
@@ -368,7 +463,7 @@ st.markdown("---")
 
 # Data Explorer
 st.subheader("Data Explorer")
-st.markdown("**Browse the actual data that was successfully loaded into the database**")
+st.markdown("Browse the actual data that was successfully loaded into the database")
 
 table_option = st.selectbox("Select table to view", ["Patients", "Encounters", "Diagnoses"])
 
@@ -419,4 +514,4 @@ else:
 st.markdown("---")
 st.caption("Healthcare ETL Pipeline - Data Quality Dashboard")
 st.caption("Last updated: Re-run ETL to refresh data")
-st.caption("Developed by **Eman Khadim**")
+st.caption("Developed by Eman Khadim")
