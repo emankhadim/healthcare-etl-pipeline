@@ -156,7 +156,7 @@ def main():
         log.warning("Invalid patient_id references: %s", fk_violations['patient_id'].unique().tolist())
         
         clean_df = clean_df[clean_df['patient_id'].isin(valid_patient_ids)]
-        log.info("Removed FK violations → %d valid records remaining", len(clean_df))
+        log.info("Removed FK violations: %d valid records remaining", len(clean_df))
     else:
         log.info("Referential integrity validated ✓")
     if drop_parts:
@@ -167,7 +167,7 @@ def main():
     else:
         log.info("No dropped rows to log")
 
-    log.info("Encounters transform complete → %d rows", len(clean_df))
+    log.info("Encounters transform complete: %d rows", len(clean_df))
 
     Path(ENCOUNTERS_CLEAN).parent.mkdir(parents=True, exist_ok=True)
     clean_df.to_csv(ENCOUNTERS_CLEAN, index=False)

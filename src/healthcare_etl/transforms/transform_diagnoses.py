@@ -117,7 +117,7 @@ def transform(df: pd.DataFrame) -> pd.DataFrame:
         Path(LOGS_DIR).mkdir(parents=True, exist_ok=True)
         dropped = dropped.reindex(columns=[c for c in DROP_LOG_COLS if c in dropped.columns])
         dropped.to_csv(DIAGNOSES_LOGS, index=False)
-        log.warning("Diagnoses: dropped %d rows → %s", len(dropped), DIAGNOSES_LOGS)
+        log.warning("Diagnoses: dropped %d row: %s", len(dropped), DIAGNOSES_LOGS)
 
     kept = df[~fatal_mask].copy()
     kept.loc[kept["qa_flags"].eq(""), "qa_flags"] = "OK"
